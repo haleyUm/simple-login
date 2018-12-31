@@ -1,4 +1,4 @@
-name := "simple_login"
+name := "simple-login"
  
 version := "1.0" 
       
