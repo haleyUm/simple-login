@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>simple-login</title>
+
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/bootstrap.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/AdminLTE.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("font/font-awesome.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/skin-blue.min.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+
+        <script type="text/javascript" src="@routes.Assets.versioned("js/jquery-3.3.1.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("js/bootstrap.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("js/adminlte.js")"></script>
+
+        <script type='text/javascript'>
+
+         $(function () {
+             $.ajaxSetup({contentType: 'application/json'});
+         });
+
+         function loginAuth(){
+             var id = $('#id').val();
+             var pw = $('#password').val();
+
+             $.post('/login/auth' ,
+                     JSON.stringify({
+                         "id": id,
+                         "password": pw
+                     }))
+                     .done ( function(result){
+                       if( result === 'success'){
+                         location.href = "/home"
+                       }
+                     });
+         }
+
+        </script>
+
+
+    </head>
+    <body class="hold-transition login-page">
+
+        <div class="login-box">
+            <div class="login-logo">
+               <b>Login</b>
+            </div>
+
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" placeholder="Id" id="id">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" placeholder="password" id="password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button type="button" onclick="loginAuth()" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </body>
+</html>
